@@ -4,12 +4,18 @@ import guru.springframework.sfgdi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan(basePackages = {"guru.springframework.sfgdi", "guru.springframework.pets"})
 @SpringBootApplication
 public class SfgDiApplication {
     
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
+        
+        System.out.println("============= The best pet is: ");
+        PetController petController = ctx.getBean("petController", PetController.class);
+        System.out.println(petController.whichPetIsTheBest());
         
         System.out.println("============= Primary Bean");
         I18nController i18nController = ctx.getBean(
